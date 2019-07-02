@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import NativeBridge from '../../util/nativeBridge';
 
 export default class Header extends Component {
     render() {
@@ -10,6 +11,6 @@ export default class Header extends Component {
     }
 
     goBack = () => {
-        console.log('goback');
+        NativeBridge.backToNative();
     }
 }
