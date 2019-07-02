@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Slider, Icon } from 'antd';
+import { store_update_slider_value } from '../../store/actions/modeActions';
 
 class IconSlider extends Component {
     state = {
@@ -8,11 +9,7 @@ class IconSlider extends Component {
     }
 
     handleChange = value => {
-        this.setState({ value }, () => {
-            if (this.props.callback) {
-                this.props.callback(this.state.value)
-            }
-        });
+        store_update_slider_value(value);
     }
 
     render() {

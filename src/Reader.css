@@ -21,3 +21,28 @@
 .default_fontSize > * >p {
   font-size: 18px;
 }
+
+.default_fontSizeP1 > * >p {
+  font-size: 20px;
+}
+
+.default_fontSizeP2 > * >p {
+  font-size: 22px;
+}
+
+.default_fontSizeP3 > * >p {
+  font-size: 24px;
+}
+
+.default_fontSizeM1 > * >p {
+  font-size: 16px;
+}
+
+.default_fontSizeM2 > * >p {
+  font-size: 14px;
+}
+
+.default_fontSizeM3 > * >p {
+  font-size: 12px;
+}
+
