@@ -18,6 +18,7 @@ const defaultFontSizeClassNameMinus3 = 'default_fontSizeM3';
 const initialState = {
     isDark: false,
     sliderValue: 4,
+    lightColorSelectIndex: 0,
     lightColorClassName: defaultBgColorClassName,
     fontSizeClassName: defaultFontSizeClassName,
     textContainerClassName: `${baseClassName} ${defaultBgColorClassName} ${defaultFontSizeClassName}`

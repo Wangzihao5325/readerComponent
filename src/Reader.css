@@ -6,6 +6,18 @@
   background-color: rgb(193, 179, 156);
 }
 
+.blurBgColor {
+  background-color: rgb(192, 212, 228);
+}
+
+.greenBgColor {
+  background-color: rgb(206, 231, 203);
+}
+
+.whiteBgColor {
+  background-color: rgb(255, 255, 255);
+}
+
 .blackBgColor {
   background-color: rgb(26, 26, 26);
 }
