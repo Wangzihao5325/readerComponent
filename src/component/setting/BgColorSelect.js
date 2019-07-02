@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { store_change_light_bg_color } from '../../store/actions/modeActions';
 
 class Item extends Component {
     render() {
@@ -30,7 +31,7 @@ class BgColorSelect extends Component {
     }
 
     itemClick = (index) => {
-
+        store_change_light_bg_color(index);
     }
 }
 

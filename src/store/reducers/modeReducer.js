@@ -3,6 +3,9 @@ import * as Types from '../actionTypes';
 const baseClassName = 'text_container';
 
 const defaultBgColorClassName = 'defaultBgColor';
+const blueBgColorClassName = 'blurBgColor';
+const greenBgColorClassName = 'greenBgColor';
+const whiteBgColorClassName = 'whiteBgColor';
 const blackBgColorClassName = 'blackBgColor';
 
 const defaultFontSizeClassName = 'default_fontSize';
@@ -68,6 +71,30 @@ const reducer = (state = initialState, action) => {
                 fontSizeClassName,
                 sliderValue: action.sliderValue,
                 textContainerClassName: `${baseClassName} ${state.isDark ? blackBgColorClassName : state.lightColorClassName} ${fontSizeClassName}`
+            }
+
+        case Types.CHANGE_LIGHT_BG_COLOR:
+            let lightBgColorClassName = defaultBgColorClassName;
+            switch (action.index) {
+                case 0:
+                    lightBgColorClassName = defaultBgColorClassName;
+                    break;
+                case 1:
+                    lightBgColorClassName = blueBgColorClassName;
+                    break;
+                case 2:
+                    lightBgColorClassName = greenBgColorClassName;
+                    break;
+                case 3:
+                    lightBgColorClassName = whiteBgColorClassName;
+                    break;
+            }
+            return {
+                ...state,
+                isDark: false,
+                lightColorSelectIndex: action.index,
+                lightColorClassName: lightBgColorClassName,
+                textContainerClassName: `${baseClassName} ${lightBgColorClassName} ${state.fontSizeClassName}`
             }
         default:
             return state;
