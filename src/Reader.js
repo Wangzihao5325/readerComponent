@@ -43,7 +43,7 @@ class Reader extends Component {
           {this.state.isControllerShow && <Header />}
           <div onClick={this.textOnClick} dangerouslySetInnerHTML={this.state.htmlBody} />
           {this.state.isControllerShow && this.state.isSettingShow &&
-            <Setting fontSizeCallback={this.fontSizeChangeCallback} />
+            <Setting />
           }
           {this.state.isControllerShow &&
             <Footer
@@ -86,9 +86,6 @@ class Reader extends Component {
     });
   }
 
-  fontSizeChangeCallback = (level) => {
-    console.log(level);
-  }
 }
 
 function mapState2Props(store) {

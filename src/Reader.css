@@ -17,3 +17,7 @@
 .text_container > * > p {
   font-size: 18px;
 }
+
+.default_fontSize > * >p {
+  font-size: 18px;
+}
