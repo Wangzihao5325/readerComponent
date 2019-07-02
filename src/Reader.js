@@ -1,23 +1,22 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import CryptoJS from 'crypto-js';
 import {
   store_change_mode_to_light,
   store_change_mode_to_dark,
   store_update_slider_value,
   store_change_light_bg_color
 } from './store/actions/modeActions';
+import {
+  store_get_text_html_body
+} from './store/actions/dataActions';
 import './Reader.css';
 import Header from './component/header/index';
 import Footer from './component/bottom/index';
 import Setting from './component/setting/index';
 
-const SecurtyKey = CryptoJS.enc.Utf8.parse('wPK8CxWaOwPuVzgs');
-
 class Reader extends Component {
 
   state = {
-    htmlBody: null,
     isControllerShow: false,
     isSettingShow: false
   }
@@ -41,46 +40,30 @@ class Reader extends Component {
       store_change_light_bg_color(lightColorSelectIndex, true);
     }
 
-    let uri = 'http://192.168.0.146:50005/FICTION/6d/d1/126dd102847cfa08177a3e898c466e9aadb5b22315.fiction';
-    fetch(uri).then(res => res.blob())
-      .then((blob) => {
-        var reader = new window.FileReader();
-        reader.readAsText(blob);
-        reader.onloadend = () => {
-          var content = reader.result;
-          let decodeUrl = decodeURIComponent(content);
-          let bytes = CryptoJS.AES.decrypt(decodeUrl, SecurtyKey, { mode: CryptoJS.mode.ECB, padding: CryptoJS.pad.Pkcs7, iv: '', });
-          let resultDecipher = CryptoJS.enc.Utf8.stringify(bytes);
-          this.setState({
-            htmlBody: { __html: resultDecipher }
-          });
-        }
-      });
+    /**
+     * 获取数据
+     */
+    store_get_text_html_body('http://192.168.0.146:50005/FICTION/6d/d1/126dd102847cfa08177a3e898c466e9aadb5b22315.fiction');
+
   }
 
 
   render() {
-    if (this.state.htmlBody) {
-      return (
-        <div className={this.props.textContainerClassName}>
-          {this.state.isControllerShow && <Header />}
-          <div onClick={this.textOnClick} dangerouslySetInnerHTML={this.state.htmlBody} />
-          {this.state.isControllerShow && this.state.isSettingShow &&
-            <Setting />
-          }
-          {this.state.isControllerShow &&
-            <Footer
-              primaryChange={this.darkPrimary}
-              openSettingPage={this.openSettingPage}
-            />
-          }
-        </div>
-      );
-    } else {
-      return (
-        <div>no data</div>
-      );
-    }
+    return (
+      <div className={this.props.textContainerClassName}>
+        {this.state.isControllerShow && <Header />}
+        {this.props.htmlBody && <div onClick={this.textOnClick} dangerouslySetInnerHTML={this.props.htmlBody} />}
+        {this.state.isControllerShow && this.state.isSettingShow &&
+          <Setting />
+        }
+        {this.state.isControllerShow &&
+          <Footer
+            primaryChange={this.darkPrimary}
+            openSettingPage={this.openSettingPage}
+          />
+        }
+      </div>
+    );
   }
 
   textOnClick = () => {
@@ -114,7 +97,8 @@ class Reader extends Component {
 function mapState2Props(store) {
   return {
     isDark: store.mode.isDark,
-    textContainerClassName: store.mode.textContainerClassName
+    textContainerClassName: store.mode.textContainerClassName,
+    htmlBody: store.data.htmlBody
   }
 }
 
