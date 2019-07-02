@@ -1,7 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import CryptoJS from 'crypto-js';
-import { store_change_mode_to_light, store_change_mode_to_dark } from './store/actions/modeActions';
+import {
+  store_change_mode_to_light,
+  store_change_mode_to_dark,
+  store_update_slider_value,
+  store_change_light_bg_color
+} from './store/actions/modeActions';
 import './Reader.css';
 import Header from './component/header/index';
 import Footer from './component/bottom/index';
@@ -18,6 +23,24 @@ class Reader extends Component {
   }
 
   componentDidMount() {
+    /**
+     * 读取并还原阅读设置
+     */
+    if (window.localStorage.sliderValue) {
+      let sliderValue = parseInt(window.localStorage.sliderValue);
+      store_update_slider_value(sliderValue);
+    }
+    if (window.localStorage.isDark) {
+      let isDark = parseInt(window.localStorage.isDark) === 0 ? false : true;
+      if (isDark) {
+        store_change_mode_to_dark();
+      }
+    }
+    if (window.localStorage.lightColorSelectIndex) {
+      let lightColorSelectIndex = parseInt(window.localStorage.lightColorSelectIndex);
+      store_change_light_bg_color(lightColorSelectIndex, true);
+    }
+
     let uri = 'http://192.168.0.146:50005/FICTION/6d/d1/126dd102847cfa08177a3e898c466e9aadb5b22315.fiction';
     fetch(uri).then(res => res.blob())
       .then((blob) => {

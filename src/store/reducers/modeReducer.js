@@ -30,12 +30,14 @@ const initialState = {
 const reducer = (state = initialState, action) => {
     switch (action.type) {
         case Types.CHANGE_MODE_TO_DARK:
+            window.localStorage.setItem('isDark', '1');
             return {
                 ...state,
                 isDark: true,
                 textContainerClassName: `${baseClassName} ${blackBgColorClassName} ${state.fontSizeClassName}`
             }
         case Types.CHANGE_MODE_TO_LIGHT:
+            window.localStorage.setItem('isDark', '0');
             return {
                 ...state,
                 isDark: false,
@@ -66,6 +68,7 @@ const reducer = (state = initialState, action) => {
                     fontSizeClassName = defaultFontSizeClassNamePlus3;
                     break;
             }
+            window.localStorage.setItem('sliderValue', `${action.sliderValue}`);
             return {
                 ...state,
                 fontSizeClassName,
@@ -89,12 +92,31 @@ const reducer = (state = initialState, action) => {
                     lightBgColorClassName = whiteBgColorClassName;
                     break;
             }
-            return {
-                ...state,
-                isDark: false,
-                lightColorSelectIndex: action.index,
-                lightColorClassName: lightBgColorClassName,
-                textContainerClassName: `${baseClassName} ${lightBgColorClassName} ${state.fontSizeClassName}`
+            window.localStorage.setItem('lightColorSelectIndex', `${action.index}`);
+            if (action.keepDarkSet) {
+                if (state.isDark) {
+                    return {
+                        ...state,
+                        lightColorSelectIndex: action.index,
+                        lightColorClassName: lightBgColorClassName,
+                    }
+                } else {
+                    return {
+                        ...state,
+                        lightColorSelectIndex: action.index,
+                        lightColorClassName: lightBgColorClassName,
+                        textContainerClassName: `${baseClassName} ${lightBgColorClassName} ${state.fontSizeClassName}`
+                    }
+                }
+            } else {
+                window.localStorage.setItem('isDark', '0');
+                return {
+                    ...state,
+                    isDark: false,
+                    lightColorSelectIndex: action.index,
+                    lightColorClassName: lightBgColorClassName,
+                    textContainerClassName: `${baseClassName} ${lightBgColorClassName} ${state.fontSizeClassName}`
+                }
             }
         default:
             return state;

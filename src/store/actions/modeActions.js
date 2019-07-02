@@ -18,6 +18,6 @@ export function store_update_slider_value(value) {
     store.dispatch({ type: UPDATE_SLIDER_VALUE, sliderValue: value });
 }
 
-export function store_change_light_bg_color(index) {
-    store.dispatch({ type: CHANGE_LIGHT_BG_COLOR, index });
+export function store_change_light_bg_color(index, keepDarkSet) {
+    store.dispatch({ type: CHANGE_LIGHT_BG_COLOR, index, keepDarkSet });
 }
