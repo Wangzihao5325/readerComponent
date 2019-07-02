@@ -9,7 +9,8 @@ class ItemBtn extends Component {
     render() {
         return (
             <div onClick={this.itemOnClick} style={{ flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
-                <div style={{ color: 'white', fontSize: 13 }}>{this.props.title}</div>
+                <img src={this.props.icon} style={{ height: 21, width: 21 }} alt='' />
+                <div style={{ color: 'white', fontSize: 13, marginTop: 3 }}>{this.props.title}</div>
             </div>
         );
     }
@@ -26,10 +27,10 @@ export default class Footer extends Component {
     render() {
         return (
             <div style={{ display: 'flex', flexDirection: 'row', height: 64, width: '100%', position: 'fixed', bottom: 0, left: 0, backgroundColor: 'rgb(3,3,3)' }}>
-                <ItemBtn callback={this.showChapterList} icon={require('../../image/font-size.svg')} title='目录' />
-                <ItemBtn callback={this.progress} icon={require('../../image/font-size.svg')} title='进度' />
-                <ItemBtn callback={this.setting} icon={require('../../image/font-size.svg')} title='设置' />
-                <ItemBtn callback={this.primary} icon={require('../../image/font-size.svg')} title='日间' />
+                <ItemBtn key='menu_list' type='menu_list' icon={require('../../image/chapter_list.png')} callback={this.showChapterList} title='目录' />
+                <ItemBtn key='progress' type='progress' icon={require('../../image/progress.png')} callback={this.progress} title='进度' />
+                <ItemBtn key='setting' type='setting' icon={require('../../image/font.png')} callback={this.setting} title='设置' />
+                <ItemBtn key='mode' type='mode' icon={require('../../image/sun.png')} callback={this.primary} title='日间' />
             </div>
         );
     }
