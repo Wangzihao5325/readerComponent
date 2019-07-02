@@ -13,6 +13,8 @@ import './Reader.css';
 import Header from './component/header/index';
 import Footer from './component/bottom/index';
 import Setting from './component/setting/index';
+import { Spin } from 'antd';
+import { CLIENT_WIDTH, CLIENT_HEIGHT } from './global/size';
 
 class Reader extends Component {
 
@@ -50,7 +52,8 @@ class Reader extends Component {
 
   render() {
     return (
-      <div className={this.props.textContainerClassName}>
+      <div className={this.props.textContainerClassName} style={{ position: 'relative' }}>
+        {this.props.appState !== 'done' && <div style={{ height: 30, width: 30, position: 'absolute', top: CLIENT_HEIGHT / 2 - 15, left: CLIENT_WIDTH / 2 - 15, zIndex: 10 }}><Spin /></div>}
         {this.state.isControllerShow && <Header />}
         {this.props.htmlBody && <div onClick={this.textOnClick} dangerouslySetInnerHTML={this.props.htmlBody} />}
         {this.state.isControllerShow && this.state.isSettingShow &&
@@ -98,7 +101,8 @@ function mapState2Props(store) {
   return {
     isDark: store.mode.isDark,
     textContainerClassName: store.mode.textContainerClassName,
-    htmlBody: store.data.htmlBody
+    htmlBody: store.data.htmlBody,
+    appState: store.data.state,
   }
 }
 
