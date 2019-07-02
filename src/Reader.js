@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import CryptoJS from 'crypto-js';
+import { store_change_mode_to_light, store_change_mode_to_dark } from './store/actions/modeActions';
 import './Reader.css';
 import Header from './component/header/index';
 import Footer from './component/bottom/index';
@@ -8,18 +9,11 @@ import Setting from './component/setting/index';
 
 const SecurtyKey = CryptoJS.enc.Utf8.parse('wPK8CxWaOwPuVzgs');
 
-const baseClassName = 'text_container';
-const defaultBgColorClassName = 'defaultBgColor';
-const blackBgColorClassName = 'blackBgColor';
-
 class Reader extends Component {
 
   state = {
     htmlBody: null,
     isControllerShow: false,
-    textContainerClassName: `${baseClassName} ${defaultBgColorClassName}`,
-    isDark: false,
-    lightColorClassName: defaultBgColorClassName,
     isSettingShow: false
   }
 
@@ -45,7 +39,7 @@ class Reader extends Component {
   render() {
     if (this.state.htmlBody) {
       return (
-        <div className={this.state.textContainerClassName}>
+        <div className={this.props.textContainerClassName}>
           {this.state.isControllerShow && <Header />}
           <div onClick={this.textOnClick} dangerouslySetInnerHTML={this.state.htmlBody} />
           {this.state.isControllerShow && this.state.isSettingShow &&
@@ -77,19 +71,11 @@ class Reader extends Component {
   }
 
   darkPrimary = () => {
-    this.setState((preState) => {
-      if (preState.isDark) {
-        return {
-          isDark: false,
-          textContainerClassName: `${baseClassName} ${preState.lightColorClassName}`
-        }
-      } else {
-        return {
-          isDark: true,
-          textContainerClassName: `${baseClassName} ${blackBgColorClassName}`
-        }
-      }
-    });
+    if (this.props.isDark) {
+      store_change_mode_to_light();
+    } else {
+      store_change_mode_to_dark();
+    }
   }
 
   openSettingPage = () => {
@@ -107,7 +93,8 @@ class Reader extends Component {
 
 function mapState2Props(store) {
   return {
-    isDark: store.mode.isDark
+    isDark: store.mode.isDark,
+    textContainerClassName: store.mode.textContainerClassName
   }
 }
 

@@ -8,6 +8,6 @@ export function store_change_mode_to_light() {
     store.dispatch({ type: CHANGE_MODE_TO_LIGHT });
 }
 
-export function store_change_mode_to_light() {
+export function store_change_mode_to_dark() {
     store.dispatch({ type: CHANGE_MODE_TO_DARK });
 }
