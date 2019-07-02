@@ -1,10 +1,10 @@
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 import ReduxThunk from 'redux-thunk';
 
-import testReducer from './reducers/testReducer';
+import modeReducer from './reducers/modeReducer';
 
 const rootReducer = combineReducers({
-    test: testReducer,
+    mode: modeReducer,
 });
 
 const store = createStore(rootReducer, applyMiddleware(ReduxThunk));

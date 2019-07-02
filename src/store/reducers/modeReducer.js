@@ -15,6 +15,8 @@ const reducer = (state = initialState, action) => {
                 ...state,
                 isDark: false
             }
+        default:
+            return state;
     }
 }
 
