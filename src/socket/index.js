@@ -1,16 +1,12 @@
 import CryptoJS from 'crypto-js';
 import { browser } from '../util/browserTest';
 import { message as WebToast } from 'antd';
+import Variables from '../global/variables';
 
 const IsSecurty = true;
 const PlatformStr = browser.versions.ios ? 'I' : 'A';
-//const InterfaceKey_Origin = 'kVqduMOzInPFEfEN';
 const InterfaceKey = CryptoJS.enc.Utf8.parse('kVqduMOzInPFEfEN');
 const SignKey_Origin = 'USR6M7OlTZwNC55E';
-//const SignKey = CryptoJS.enc.Utf8.parse('USR6M7OlTZwNC55E');
-
-// const OriginKey = '1s1z1GYRRNZRSJam';
-// const SecurtyKey = CryptoJS.enc.Utf8.parse('1s1z1GYRRNZRSJam');
 
 class api {
 
@@ -62,7 +58,7 @@ class api {
     }
 
     unsecurtyFetch(url, formData, onSuccess, onError) {
-        const fullUrl = `${SERVICE_URL.DomainUrl}${url}`;
+        const fullUrl = `${Variables.service.domain}${url}`;
 
         let headerDataReg = { platform: PlatformStr };
         if (Variables.account.token) {
@@ -107,7 +103,7 @@ class api {
     }
 
     normalFetch(url, formData, onSuccess, onError) {
-        const fullUrl = `${SERVICE_URL.DomainUrl}${url}`;
+        const fullUrl = `${Variables.service.domain}${url}`;
 
         let header = { Accept: 'application/json', platform: PlatformStr };
 
@@ -140,23 +136,28 @@ class api {
             )
     }
 
-    fetchAppNotice(onSuccess, onError) {
-        const url = '/api/notice';
+    fetchChapterList(fiction_id, sort, page, limit) {
+        const url = '/api/verify-code';
         const timestamp = (new Date().getTime() / 1000).toFixed(0);
 
         if (!IsSecurty) {
             let formData = new FormData();
             formData.append('timestamp', timestamp);
+            formData.append('mobile', mobile);
             this.normalFetch(url, formData, onSuccess, onError);
             return;
         }
 
         let paramObj = {
+            mobile: mobile,
             platform: PlatformStr,
             timestamp
         }
 
         this.securtyFetch(url, paramObj, onSuccess, onError);
+    }
+
+    getTextContent(global_type, fiction_id, ) {
 
     }
 }

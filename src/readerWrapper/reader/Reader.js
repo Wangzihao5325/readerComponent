@@ -11,6 +11,9 @@ import './Reader.css';
 import Header from '../../component/header/index';
 import Footer from '../../component/bottom/index';
 import Setting from '../../component/setting/index';
+import Variables from '../../global/variables';
+import NativeBridge from '../../util/nativeBridge';
+
 
 import VConsole from 'vconsole';
 
@@ -23,10 +26,16 @@ class Reader extends Component {
   }
 
   componentDidMount() {
-    //初始化vconsole
     var vConsole = new VConsole();
-    //请求小说加密文件
-   
+    console.log(window.android);
+
+    console.log(Variables);
+
+
+    //let chapterData = NativeBridge.getReadingChapterInfo();
+
+    let aa = window.android.getFictionFolder();
+    console.log(aa);
   }
 
 
