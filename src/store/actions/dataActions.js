@@ -25,7 +25,7 @@ export function store_get_text_html_body(uri) {
                 let resultDecipher = CryptoJS.enc.Utf8.stringify(bytes);
                 store.dispatch({ type: UPDATE_TEXT_HTML_BODY, htmlBody: { __html: resultDecipher } });
                 let isInitial = store.getState().initial.isInitial;
-                if (!isInitial) setTimeout(store_initial_done, 1000);
+                if (!isInitial) setTimeout(store_initial_done, 10);
             }
         });
 }

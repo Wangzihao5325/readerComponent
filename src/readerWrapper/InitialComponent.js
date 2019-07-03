@@ -14,11 +14,15 @@ import {
 import {
     store_get_text_html_body
 } from '../store/actions/dataActions';
+import Api from '../socket/index';
 
+import VConsole from 'vconsole';
 
 export default class InitialComponent extends Component {
 
     componentDidMount() {
+        var vConsole = new VConsole();
+
         /**
          * 读取并还原阅读设置
          */
@@ -37,9 +41,7 @@ export default class InitialComponent extends Component {
             store_change_light_bg_color(lightColorSelectIndex, true);
         }
 
-        /**
-         * 配置请求参数
-         */
+        //配置参数
         let token = NativeBridge.getUserToken();
         if (token) Variables.account.token = token;
 
@@ -49,8 +51,16 @@ export default class InitialComponent extends Component {
         let deviceCode = NativeBridge.getDeviceCode();
         if (deviceCode) Variables.account.deviceCode = deviceCode;
 
-        store_get_text_html_body('http://192.168.0.146:50005/fiction_content/0a/df/120adf6d50bb5cec621b1975e40906d91c335e9162.fiction');
-        //setTimeout(store_initial_done, 1000); //初始化完毕
+        //请求数据
+        let { id, global_type } = NativeBridge.getReadingFictionInfo();
+        let chapterId = null;
+        if (global_type === 'novel') {
+            let chapterData = NativeBridge.getReadingChapterInfo();
+            chapterId = chapterData.id;
+        }
+        Api.fetchFictionFileUrl(global_type, id, chapterId, (e) => {
+            store_get_text_html_body(e.href);
+        });
     }
 
     render() {
