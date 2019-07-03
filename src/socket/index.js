@@ -194,6 +194,8 @@ class api {
         this.securtyFetch(url, paramObj, onSuccess, onError);
     }
 
+    
+
 }
 
 export default new api();

@@ -13,6 +13,7 @@ import Footer from '../../component/bottom/index';
 import Setting from '../../component/setting/index';
 import Variables from '../../global/variables';
 import NativeBridge from '../../util/nativeBridge';
+import * as Params from '../../global/param';
 
 import Api from '../../socket/index';
 
@@ -27,15 +28,12 @@ class Reader extends Component {
   }
 
   componentDidMount() {
-    //var vConsole = new VConsole();
-    console.log(window.android);
-
-
-
-    // Api.fetchChapterList(fictionData.id, 'asc', 1, 15, (e) => {
-    //   console.log(e);
-    // })
-
+    if (this.props.fictionType === Params.Nnovel) {
+      let { id } = NativeBridge.getReadingFictionInfo();
+      Api.fetchChapterList(id, Params.Asc, 1, 100, (e) => {
+        console.log(e);
+      });
+    }
   }
 
 
@@ -91,6 +89,7 @@ function mapState2Props(store) {
     textContainerClassName: store.mode.textContainerClassName,
     htmlBody: store.data.htmlBody,
     appState: store.data.state,
+    fictionType: store.data.fictionType
   }
 }
 
