@@ -14,7 +14,7 @@ class nativeBridge {
     getUserToken() {
         let token = null;
         if (browser.versions.android) {
-            token = window.android.finishActivity();
+            token = window.android.getUserToken();
         }
         if (browser.versions.ios) {
 

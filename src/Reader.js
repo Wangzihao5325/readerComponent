@@ -17,6 +17,9 @@ import { Spin } from 'antd';
 import { CLIENT_WIDTH, CLIENT_HEIGHT } from './global/size';
 import NativeBridge from './util/nativeBridge';
 
+import VConsole from 'vconsole';
+
+
 class Reader extends Component {
 
   state = {
@@ -25,6 +28,13 @@ class Reader extends Component {
   }
 
   componentDidMount() {
+
+    /**
+     * vconsole
+     */
+
+    var vConsole = new VConsole();
+
     /**
      * 读取并还原阅读设置
      */
@@ -46,8 +56,9 @@ class Reader extends Component {
     /**
      * 获取数据
      */
-    store_get_text_html_body('http://192.168.0.146:50005/FICTION/6d/d1/126dd102847cfa08177a3e898c466e9aadb5b22315.fiction');
-
+    //store_get_text_html_body('http://192.168.0.146:50005/FICTION/6d/d1/126dd102847cfa08177a3e898c466e9aadb5b22315.fiction');
+    let token = NativeBridge.getUserToken();
+    console.log(token);
   }
 
 
