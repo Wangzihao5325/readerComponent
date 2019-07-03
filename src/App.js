@@ -5,10 +5,6 @@ import Reader from './Reader';
 
 class App extends Component {
 
-    componentDidMount() {
-
-    }
-
     render() {
         return (
             <Provider store={store} >

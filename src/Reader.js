@@ -54,9 +54,9 @@ class Reader extends Component {
     /**
      * 获取数据
      */
-    store_get_text_html_body('http://192.168.0.146:50005/FICTION/6d/d1/126dd102847cfa08177a3e898c466e9aadb5b22315.fiction');
-    let token = NativeBridge.getUserToken();
-    console.log(token);
+    store_get_text_html_body('http://192.168.0.146:50005/fiction_content/0a/df/120adf6d50bb5cec621b1975e40906d91c335e9162.fiction');
+    // let token = NativeBridge.getUserToken();
+    // console.log(token);
 
     // let aaa= window.android.request('/common/notice',JSON.stringify({}));
     // alert(aaa);
