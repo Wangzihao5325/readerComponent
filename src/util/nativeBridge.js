@@ -55,10 +55,21 @@ class nativeBridge {
         return info;
     }
 
-    getReadingChapterInfo() {//获取当前小说的信息
+    getReadingFictionInfo() {//获取当前小说的信息
         let jsonStr = '';
         if (browser.versions.android) {
             jsonStr = window.android.getFictionInfo();
+        }
+        if (browser.versions.ios) {
+
+        }
+        return JSON.parse(jsonStr);
+    }
+
+    getReadingChapterInfo() {
+        let jsonStr = '';
+        if (browser.versions.android) {
+            jsonStr = window.android.getFictionFolder();
         }
         if (browser.versions.ios) {
 

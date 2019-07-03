@@ -29,13 +29,25 @@ class Reader extends Component {
   componentDidMount() {
     var vConsole = new VConsole();
     console.log(window.android);
-    console.log(Variables);
 
-    let chapterData = NativeBridge.getReadingChapterInfo();
-    //let id = '5d1b1426d81b24057037c722';
-    Api.fetchChapterList(chapterData.id, 'asc', 1, 15, (e) => {
-      console.log(e);
-    })
+    let fictionData = NativeBridge.getReadingFictionInfo();
+    if (fictionData.global_type === 'novel') {
+      let chapterData = NativeBridge.getReadingChapterInfo();
+      let fictionId = chapterData.fiction_id;
+      let chapterId = chapterData.id;
+      Api.fetchFictionFileUrl('novel', fictionId, chapterId, (e) => {
+        console.log(e);
+      });
+    } else {
+      let fictionId = fictionData.id;
+      Api.fetchFictionFileUrl('novelette', fictionId, null, (e) => {
+        console.log(e);
+      });
+    }
+
+    // Api.fetchChapterList(fictionData.id, 'asc', 1, 15, (e) => {
+    //   console.log(e);
+    // })
 
   }
 

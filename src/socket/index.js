@@ -163,6 +163,37 @@ class api {
         this.securtyFetch(url, paramObj, onSuccess, onError);
     }
 
+    fetchFictionFileUrl(global_type, fiction_id, fiction_resource_id, onSuccess, onError) {
+        const url = '/api/fiction/content';
+        const timestamp = (new Date().getTime() / 1000).toFixed(0);
+
+        if (!IsSecurty) {
+            let formData = new FormData();
+            formData.append('timestamp', timestamp);
+            formData.append('fiction_id', fiction_id);
+            formData.append('global_type', global_type);
+            if (fiction_resource_id) {
+                formData.append('fiction_resource_id', fiction_resource_id);
+            }
+            this.normalFetch(url, formData, onSuccess, onError);
+            return;
+        }
+
+        let paramObj = {
+            fiction_id,
+            fiction_resource_id,
+            global_type,
+            platform: PlatformStr,
+            timestamp
+        }
+
+        if (!fiction_resource_id) {
+            delete paramObj.fiction_resource_id;
+        }
+
+        this.securtyFetch(url, paramObj, onSuccess, onError);
+    }
+
 }
 
 export default new api();
