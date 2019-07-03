@@ -13,8 +13,6 @@ import './Reader.css';
 import Header from './component/header/index';
 import Footer from './component/bottom/index';
 import Setting from './component/setting/index';
-import { Spin } from 'antd';
-import { CLIENT_WIDTH, CLIENT_HEIGHT } from './global/size';
 import NativeBridge from './util/nativeBridge';
 
 import VConsole from 'vconsole';
@@ -56,16 +54,18 @@ class Reader extends Component {
     /**
      * 获取数据
      */
-    //store_get_text_html_body('http://192.168.0.146:50005/FICTION/6d/d1/126dd102847cfa08177a3e898c466e9aadb5b22315.fiction');
+    store_get_text_html_body('http://192.168.0.146:50005/FICTION/6d/d1/126dd102847cfa08177a3e898c466e9aadb5b22315.fiction');
     let token = NativeBridge.getUserToken();
     console.log(token);
+
+    // let aaa= window.android.request('/common/notice',JSON.stringify({}));
+    // alert(aaa);
   }
 
 
   render() {
     return (
       <div className={this.props.textContainerClassName} style={{ position: 'relative' }}>
-        {this.props.appState !== 'done' && <div style={{ height: 30, width: 30, position: 'absolute', top: CLIENT_HEIGHT / 2 - 15, left: CLIENT_WIDTH / 2 - 15, zIndex: 10 }}><Spin /></div>}
         {this.state.isControllerShow && <Header />}
         {this.props.htmlBody && <div onClick={this.textOnClick} dangerouslySetInnerHTML={this.props.htmlBody} />}
         {this.state.isControllerShow && this.state.isSettingShow &&
