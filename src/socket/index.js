@@ -3,7 +3,7 @@ import { browser } from '../util/browserTest';
 import { message as WebToast } from 'antd';
 import Variables from '../global/variables';
 
-const IsSecurty = true;
+const IsSecurty = false;
 const PlatformStr = browser.versions.ios ? 'I' : 'A';
 const InterfaceKey = CryptoJS.enc.Utf8.parse('kVqduMOzInPFEfEN');
 const SignKey_Origin = 'USR6M7OlTZwNC55E';
@@ -124,9 +124,9 @@ class api {
                             onSuccess(result, code, message);
                         } else {
                             if (code === 401) {
-                                ToastsStore.error('您的账号正在异地登陆,请重新登陆！');
+                                WebToast.error('您的账号正在异地登陆,请重新登陆！');
                             } else {
-                                ToastsStore.error(message);
+                                WebToast.error(message);
                             }
                         }
                     } catch (error) {
@@ -136,28 +136,33 @@ class api {
             )
     }
 
-    fetchChapterList(fiction_id, sort, page, limit) {
-        const url = '/api/verify-code';
+    fetchChapterList(fiction_id, sort, page, limit, onSuccess, onError) {
+        const url = '/api/fiction/chapter';
         const timestamp = (new Date().getTime() / 1000).toFixed(0);
 
         if (!IsSecurty) {
             let formData = new FormData();
             formData.append('timestamp', timestamp);
-            formData.append('mobile', mobile);
+            formData.append('fiction_id', fiction_id);
+            formData.append('sort', sort);
+            formData.append('page', page);
+            formData.append('limit', limit);
             this.normalFetch(url, formData, onSuccess, onError);
             return;
         }
 
         let paramObj = {
-            mobile: mobile,
+            fiction_id,
+            limit,
+            page,
             platform: PlatformStr,
+            sort,
             timestamp
         }
 
         this.securtyFetch(url, paramObj, onSuccess, onError);
     }
 
-    getTextContent(global_type, fiction_id, ) {
-
-    }
 }
+
+export default new api();

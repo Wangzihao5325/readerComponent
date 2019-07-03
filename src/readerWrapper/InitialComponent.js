@@ -41,13 +41,13 @@ export default class InitialComponent extends Component {
          * 配置请求参数
          */
         let token = NativeBridge.getUserToken();
-        Variables.account.token = token;
+        if (token) Variables.account.token = token;
 
         let domain = NativeBridge.getDomain();
-        Variables.service.domain = domain;
+        if (domain) Variables.service.domain = domain;
 
         let deviceCode = NativeBridge.getDeviceCode();
-        Variables.account.deviceCode = deviceCode;
+        if (deviceCode) Variables.account.deviceCode = deviceCode;
 
         store_get_text_html_body('http://192.168.0.146:50005/fiction_content/0a/df/120adf6d50bb5cec621b1975e40906d91c335e9162.fiction');
         //setTimeout(store_initial_done, 1000); //初始化完毕

@@ -14,6 +14,7 @@ import Setting from '../../component/setting/index';
 import Variables from '../../global/variables';
 import NativeBridge from '../../util/nativeBridge';
 
+import Api from '../../socket/index';
 
 import VConsole from 'vconsole';
 
@@ -28,14 +29,14 @@ class Reader extends Component {
   componentDidMount() {
     var vConsole = new VConsole();
     console.log(window.android);
-
     console.log(Variables);
 
+    let chapterData = NativeBridge.getReadingChapterInfo();
+    //let id = '5d1b1426d81b24057037c722';
+    Api.fetchChapterList(chapterData.id, 'asc', 1, 15, (e) => {
+      console.log(e);
+    })
 
-    //let chapterData = NativeBridge.getReadingChapterInfo();
-
-    let aa = window.android.getFictionFolder();
-    console.log(aa);
   }
 
 
