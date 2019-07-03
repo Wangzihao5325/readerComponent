@@ -4,7 +4,8 @@ import * as Params from '../../global/param';
 const initialState = {
     state: 'done',
     htmlBody: null,
-    fictionType: Params.Nnovel
+    fictionType: Params.Nnovel,
+    chapterList: []
 }
 
 const reducer = (state = initialState, action) => {
@@ -25,6 +26,11 @@ const reducer = (state = initialState, action) => {
                 state: 'done',
                 htmlBody: action.htmlBody,
                 fictionType: action.fictionType ? action.fictionType : state.fictionType
+            }
+        case Types.UPDATE_CHAPTER_LIST:
+            return {
+                ...state,
+                chapterList: action.chapterList
             }
         default: return state
     }

@@ -5,7 +5,7 @@ import {
   store_change_mode_to_dark,
 } from '../../store/actions/modeActions';
 import {
-  store_get_text_html_body
+  store_update_chapter_list
 } from '../../store/actions/dataActions';
 import './Reader.css';
 import Header from '../../component/header/index';
@@ -31,7 +31,9 @@ class Reader extends Component {
     if (this.props.fictionType === Params.Nnovel) {
       let { id } = NativeBridge.getReadingFictionInfo();
       Api.fetchChapterList(id, Params.Asc, 1, 100, (e) => {
-        console.log(e);
+        if (e) {
+          store_update_chapter_list(e);
+        }
       });
     }
   }

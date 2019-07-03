@@ -3,7 +3,8 @@ import CryptoJS from 'crypto-js';
 import {
     DATA_LOADING,
     DATA_DECODE,
-    UPDATE_TEXT_HTML_BODY
+    UPDATE_TEXT_HTML_BODY,
+    UPDATE_CHAPTER_LIST
 } from '../actionTypes';
 import { store_initial_done } from './initialActions';
 
@@ -28,4 +29,8 @@ export function store_get_text_html_body(uri, fictionType) {
                 if (!isInitial) setTimeout(store_initial_done, 10);
             }
         });
+}
+
+export function store_update_chapter_list(chapterList) {
+    store.dispatch({ type: UPDATE_CHAPTER_LIST, chapterList });
 }
