@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import InitialComponent from './InitialComponent';
-import Reader from '../Reader';
+import Reader from './reader/Reader';
 
 
 class MiddleWare extends Component {

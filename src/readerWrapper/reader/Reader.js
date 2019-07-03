@@ -3,14 +3,14 @@ import { connect } from 'react-redux';
 import {
   store_change_mode_to_light,
   store_change_mode_to_dark,
-} from './store/actions/modeActions';
+} from '../../store/actions/modeActions';
 import {
   store_get_text_html_body
-} from './store/actions/dataActions';
+} from '../../store/actions/dataActions';
 import './Reader.css';
-import Header from './component/header/index';
-import Footer from './component/bottom/index';
-import Setting from './component/setting/index';
+import Header from '../../component/header/index';
+import Footer from '../../component/bottom/index';
+import Setting from '../../component/setting/index';
 
 import VConsole from 'vconsole';
 
