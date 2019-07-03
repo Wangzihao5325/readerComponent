@@ -15,6 +15,7 @@ import Footer from './component/bottom/index';
 import Setting from './component/setting/index';
 import { Spin } from 'antd';
 import { CLIENT_WIDTH, CLIENT_HEIGHT } from './global/size';
+import NativeBridge from './util/nativeBridge';
 
 class Reader extends Component {
 
