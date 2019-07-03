@@ -15,6 +15,7 @@ import {
     store_get_text_html_body
 } from '../store/actions/dataActions';
 import Api from '../socket/index';
+import * as Params from '../global/param';
 
 import VConsole from 'vconsole';
 
@@ -54,12 +55,12 @@ export default class InitialComponent extends Component {
         //请求数据
         let { id, global_type } = NativeBridge.getReadingFictionInfo();
         let chapterId = null;
-        if (global_type === 'novel') {
+        if (global_type === Params.Nnovel) {
             let chapterData = NativeBridge.getReadingChapterInfo();
             chapterId = chapterData.id;
         }
         Api.fetchFictionFileUrl(global_type, id, chapterId, (e) => {
-            store_get_text_html_body(e.href);
+            store_get_text_html_body(e.href, global_type);
         });
     }
 

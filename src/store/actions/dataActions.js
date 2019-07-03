@@ -10,7 +10,7 @@ import { store_initial_done } from './initialActions';
 const SecurtyKey = CryptoJS.enc.Utf8.parse('wPK8CxWaOwPuVzgs');
 
 
-export function store_get_text_html_body(uri) {
+export function store_get_text_html_body(uri, fictionType) {
     store.dispatch({ type: DATA_LOADING });
 
     fetch(uri).then(res => res.blob())
@@ -23,7 +23,7 @@ export function store_get_text_html_body(uri) {
                 let decodeUrl = decodeURIComponent(content);
                 let bytes = CryptoJS.AES.decrypt(decodeUrl, SecurtyKey, { mode: CryptoJS.mode.ECB, padding: CryptoJS.pad.Pkcs7, iv: '', });
                 let resultDecipher = CryptoJS.enc.Utf8.stringify(bytes);
-                store.dispatch({ type: UPDATE_TEXT_HTML_BODY, htmlBody: { __html: resultDecipher } });
+                store.dispatch({ type: UPDATE_TEXT_HTML_BODY, htmlBody: { __html: resultDecipher }, fictionType });
                 let isInitial = store.getState().initial.isInitial;
                 if (!isInitial) setTimeout(store_initial_done, 10);
             }

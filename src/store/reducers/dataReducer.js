@@ -1,8 +1,10 @@
 import * as Types from '../actionTypes';
+import * as Params from '../../global/param';
 
 const initialState = {
     state: 'done',
-    htmlBody: null
+    htmlBody: null,
+    fictionType: Params.Nnovel
 }
 
 const reducer = (state = initialState, action) => {
@@ -21,7 +23,8 @@ const reducer = (state = initialState, action) => {
             return {
                 ...state,
                 state: 'done',
-                htmlBody: action.htmlBody
+                htmlBody: action.htmlBody,
+                fictionType: action.fictionType ? action.fictionType : state.fictionType
             }
         default: return state
     }
