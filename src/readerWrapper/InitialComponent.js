@@ -7,6 +7,9 @@ import {
     store_update_slider_value,
     store_change_light_bg_color
 } from '../store/actions/modeActions';
+import {
+    store_get_text_html_body
+} from '../store/actions/dataActions';
 import NativeBridge from '../util/nativeBridge';
 
 
@@ -41,7 +44,9 @@ export default class InitialComponent extends Component {
         // let aaa= window.android.request('/common/notice',JSON.stringify({}));
         // alert(aaa);
 
-        setTimeout(store_initial_done, 1000); //初始化完毕
+        
+        store_get_text_html_body('http://192.168.0.146:50005/fiction_content/0a/df/120adf6d50bb5cec621b1975e40906d91c335e9162.fiction');
+        //setTimeout(store_initial_done, 1000); //初始化完毕
     }
 
     render() {

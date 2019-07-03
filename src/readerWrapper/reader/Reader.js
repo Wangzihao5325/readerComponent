@@ -26,7 +26,7 @@ class Reader extends Component {
     //初始化vconsole
     var vConsole = new VConsole();
     //请求小说加密文件
-    store_get_text_html_body('http://192.168.0.146:50005/fiction_content/0a/df/120adf6d50bb5cec621b1975e40906d91c335e9162.fiction');
+   
   }
 
 
