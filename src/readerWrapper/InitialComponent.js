@@ -12,7 +12,8 @@ import {
     store_change_light_bg_color
 } from '../store/actions/modeActions';
 import {
-    store_get_text_html_body
+    store_get_text_html_body,
+    store_update_data_info_danger
 } from '../store/actions/dataActions';
 import Api from '../socket/index';
 import * as Params from '../global/param';
@@ -62,6 +63,7 @@ export default class InitialComponent extends Component {
         Api.fetchFictionFileUrl(global_type, id, chapterId, (e) => {
             store_get_text_html_body(e.href, global_type);
         });
+        store_update_data_info_danger({ title });//危险方法
     }
 
     render() {

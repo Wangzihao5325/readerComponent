@@ -4,7 +4,8 @@ import {
     DATA_LOADING,
     DATA_DECODE,
     UPDATE_TEXT_HTML_BODY,
-    UPDATE_CHAPTER_LIST
+    UPDATE_CHAPTER_LIST,
+    UPDATE_DATA_INFO
 } from '../actionTypes';
 import { store_initial_done } from './initialActions';
 
@@ -33,4 +34,8 @@ export function store_get_text_html_body(uri, fictionType) {
 
 export function store_update_chapter_list(chapterList) {
     store.dispatch({ type: UPDATE_CHAPTER_LIST, chapterList });
+}
+
+export function store_update_data_info_danger(infoObj) {
+    store.dispatch({ type: UPDATE_DATA_INFO, infoObj });
 }

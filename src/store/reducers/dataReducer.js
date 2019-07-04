@@ -5,7 +5,8 @@ const initialState = {
     state: 'done',
     htmlBody: null,
     fictionType: Params.Nnovel,
-    chapterList: []
+    chapterList: [],
+    title: ''
 }
 
 const reducer = (state = initialState, action) => {
@@ -31,6 +32,11 @@ const reducer = (state = initialState, action) => {
             return {
                 ...state,
                 chapterList: action.chapterList
+            }
+        case Types.UPDATE_DATA_INFO:
+            return {
+                ...state,
+                ...action.infoObj
             }
         default: return state
     }
