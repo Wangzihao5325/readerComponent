@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Drawer } from 'antd';
 import {
   store_change_mode_to_light,
   store_change_mode_to_dark,
@@ -14,7 +15,6 @@ import Setting from '../../component/setting/index';
 import Variables from '../../global/variables';
 import NativeBridge from '../../util/nativeBridge';
 import * as Params from '../../global/param';
-
 import Api from '../../socket/index';
 
 import VConsole from 'vconsole';
@@ -24,7 +24,8 @@ class Reader extends Component {
 
   state = {
     isControllerShow: false,
-    isSettingShow: false
+    isSettingShow: false,
+    isDrawerShow: false
   }
 
   componentDidMount() {
@@ -53,8 +54,24 @@ class Reader extends Component {
             openSettingPage={this.openSettingPage}
           />
         }
+        <Drawer
+          bodyStyle={{ backgroundColor: 'rgb(34,34,34)', padding: 0 }}
+          placement="right"
+          closable={false}
+          onClose={this.draweOnClose}
+          visible={this.state.isDrawerShow}
+          width={281}
+        >
+          11223
+        </Drawer>
       </div>
     );
+  }
+
+  draweOnClose = () => {
+    this.setState({
+      isDrawerShow:true
+    });
   }
 
   textOnClick = () => {
