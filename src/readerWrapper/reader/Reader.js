@@ -1,24 +1,20 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Drawer } from 'antd';
-import {
-  store_change_mode_to_light,
-  store_change_mode_to_dark,
-} from '../../store/actions/modeActions';
+import NativeBridge from '../../util/nativeBridge';
+import * as Params from '../../global/param';
+import Api from '../../socket/index';
+import Header from '../../component/header/index';
+import Footer from '../../component/bottom/index';
+import Setting from '../../component/setting/index';
+import ChapterList from '../../component/chapterList/index';
+import { store_change_mode_to_light, store_change_mode_to_dark } from '../../store/actions/modeActions';
 import {
   store_update_chapter_list
 } from '../../store/actions/dataActions';
 import { store_close_drawer } from '../../store/actions/controllerAction';
 import './Reader.css';
-import Header from '../../component/header/index';
-import Footer from '../../component/bottom/index';
-import Setting from '../../component/setting/index';
-import Variables from '../../global/variables';
-import NativeBridge from '../../util/nativeBridge';
-import * as Params from '../../global/param';
-import Api from '../../socket/index';
 
-import VConsole from 'vconsole';
 
 
 class Reader extends Component {
@@ -55,21 +51,16 @@ class Reader extends Component {
           />
         }
         <Drawer
-          bodyStyle={{ backgroundColor: 'rgb(34,34,34)', padding: 0 }}
           placement="right"
           closable={false}
-          onClose={this.draweOnClose}
+          onClose={store_close_drawer}
           visible={this.props.isDrawerShow}
           width={281}
         >
-          11223
+          <ChapterList />
         </Drawer>
       </div>
     );
-  }
-
-  draweOnClose = () => {
-    store_close_drawer();
   }
 
   textOnClick = () => {

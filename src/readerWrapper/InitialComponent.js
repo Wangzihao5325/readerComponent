@@ -53,7 +53,7 @@ export default class InitialComponent extends Component {
         if (deviceCode) Variables.account.deviceCode = deviceCode;
 
         //请求数据
-        let { id, global_type } = NativeBridge.getReadingFictionInfo();
+        let { id, global_type, title } = NativeBridge.getReadingFictionInfo();
         let chapterId = null;
         if (global_type === Params.Nnovel) {
             let chapterData = NativeBridge.getReadingChapterInfo();
