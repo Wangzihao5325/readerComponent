@@ -17,17 +17,27 @@ import {
 } from '../store/actions/dataActions';
 import Api from '../socket/index';
 import * as Params from '../global/param';
-
 import VConsole from 'vconsole';
+
+
+window.updateValue = function (url) {
+    if (window.ZQ_bridge != undefined) {
+        window.ZQ_bridge.updateValue(url);
+    }
+};
+
+window.setZQ_bridge = function (callback) {
+    window.ZQ_bridge = callback;
+};
 
 export default class InitialComponent extends Component {
 
     componentDidMount() {
+        
+        
         var vConsole = new VConsole();
-
-        /**
-         * 读取并还原阅读设置
-         */
+        window.setZQ_bridge(NativeBridge);
+     
         if (window.localStorage.sliderValue) {
             let sliderValue = parseInt(window.localStorage.sliderValue);
             store_update_slider_value(sliderValue);
@@ -59,15 +69,20 @@ export default class InitialComponent extends Component {
         let index = 0;
         let headerTitle = title;
         if (global_type === Params.Nnovel) {
-            let chapterData = NativeBridge.getReadingChapterInfo();
-            index = chapterData.index;
-            chapterId = chapterData.id;
-            headerTitle = chapterData.title;
+           let chapterData = NativeBridge.getReadingChapterInfo();
+           index = chapterData.index;
+           chapterId = chapterData.id;
+           headerTitle = chapterData.title;
         }
-        Api.fetchFictionFileUrl(global_type, id, chapterId, index, (e) => {
-            store_get_text_html_body(e.href, global_type);
+        Api.fetchFictionFileUrl(global_type, id, chapterId, index, (e, code, message) => {
+            if (code === 200) {
+                window.android.buyFiction(id, global_type);
+            } else {
+                store_get_text_html_body(e.href, global_type);
+            }
         });
         store_update_data_info_danger({ title: headerTitle, fictionTitle: title, chapterId });//危险方法
+        
     }
 
     render() {

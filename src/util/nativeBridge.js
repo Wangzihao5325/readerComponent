@@ -1,4 +1,7 @@
 import { browser } from './browserTest';
+import Api from '../socket/index';
+import { store_get_text_html_body, store_update_data_info_danger } from '../store/actions/dataActions';
+import * as Params from '../global/param';
 
 class nativeBridge {
 
@@ -17,7 +20,7 @@ class nativeBridge {
             token = window.android.getUserToken();
         }
         if (browser.versions.ios) {
-
+            token = prompt("UserToken://");
         }
         return token;
     }
@@ -28,7 +31,7 @@ class nativeBridge {
             domain = window.android.getDomain();
         }
         if (browser.versions.ios) {
-
+            domain = prompt("Domain://");
         }
         return domain;
     }
@@ -39,7 +42,7 @@ class nativeBridge {
             deviceCode = window.android.getDeviceCode();
         }
         if (browser.versions.ios) {
-
+            deviceCode = prompt("DeviceCode://");
         }
         return deviceCode;
     }
@@ -50,7 +53,7 @@ class nativeBridge {
             info = window.android.getUserInfo();
         }
         if (browser.versions.ios) {
-
+            info = prompt("UserInfo://");
         }
         return info;
     }
@@ -61,7 +64,7 @@ class nativeBridge {
             jsonStr = window.android.getFictionInfo();
         }
         if (browser.versions.ios) {
-
+            jsonStr = prompt("FictionInfo://");
         }
         return JSON.parse(jsonStr);
     }
@@ -72,9 +75,31 @@ class nativeBridge {
             jsonStr = window.android.getFictionFolder();
         }
         if (browser.versions.ios) {
-
+            jsonStr = prompt("FictionFolder://");
         }
         return JSON.parse(jsonStr);
+    }
+
+    buySuccess() {
+        //请求数据
+        let { id, global_type, title } = this.getReadingFictionInfo();
+        let chapterId = null;
+        let index = 0;
+        let headerTitle = title;
+        if (global_type === Params.Nnovel) {
+            let chapterData = this.getReadingChapterInfo();
+            index = chapterData.index;
+            chapterId = chapterData.id;
+            headerTitle = chapterData.title;
+        }
+        Api.fetchFictionFileUrl(global_type, id, chapterId, index, (e, code, message) => {
+            if (code === 200) {
+                window.android.buyFiction(id, global_type);
+            } else {
+                store_get_text_html_body(e.href, global_type);
+            }
+        });
+        store_update_data_info_danger({ title: headerTitle, fictionTitle: title, chapterId });//危险方法
     }
 
 }
