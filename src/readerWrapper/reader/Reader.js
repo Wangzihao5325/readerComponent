@@ -8,6 +8,7 @@ import {
 import {
   store_update_chapter_list
 } from '../../store/actions/dataActions';
+import { store_close_drawer } from '../../store/actions/controllerAction';
 import './Reader.css';
 import Header from '../../component/header/index';
 import Footer from '../../component/bottom/index';
@@ -25,7 +26,6 @@ class Reader extends Component {
   state = {
     isControllerShow: false,
     isSettingShow: false,
-    isDrawerShow: false
   }
 
   componentDidMount() {
@@ -59,7 +59,7 @@ class Reader extends Component {
           placement="right"
           closable={false}
           onClose={this.draweOnClose}
-          visible={this.state.isDrawerShow}
+          visible={this.props.isDrawerShow}
           width={281}
         >
           11223
@@ -69,9 +69,7 @@ class Reader extends Component {
   }
 
   draweOnClose = () => {
-    this.setState({
-      isDrawerShow:true
-    });
+    store_close_drawer();
   }
 
   textOnClick = () => {
@@ -108,7 +106,8 @@ function mapState2Props(store) {
     textContainerClassName: store.mode.textContainerClassName,
     htmlBody: store.data.htmlBody,
     appState: store.data.state,
-    fictionType: store.data.fictionType
+    fictionType: store.data.fictionType,
+    isDrawerShow: store.controller.isDrawerShow
   }
 }
 

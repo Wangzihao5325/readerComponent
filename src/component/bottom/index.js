@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { store_open_drawer } from '../../store/actions/controllerAction';
 import * as Params from '../../global/param';
 
 class ItemBtn extends Component {
@@ -50,7 +51,7 @@ class Footer extends Component {
     }
 
     showChapterList = () => {
-        console.log('目录');
+        store_open_drawer();
     }
 
     progress = () => {
