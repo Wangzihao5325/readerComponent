@@ -8,6 +8,7 @@ import Header from '../../component/header/index';
 import Footer from '../../component/bottom/index';
 import Setting from '../../component/setting/index';
 import ChapterList from '../../component/chapterList/index';
+import Progress from '../../component/progress/index';
 import { store_change_mode_to_light, store_change_mode_to_dark } from '../../store/actions/modeActions';
 import {
   store_update_chapter_list
@@ -22,6 +23,7 @@ class Reader extends Component {
   state = {
     isControllerShow: false,
     isSettingShow: false,
+    isProgressShow: false,
   }
 
   componentDidMount() {
@@ -44,10 +46,14 @@ class Reader extends Component {
         {this.state.isControllerShow && this.state.isSettingShow &&
           <Setting />
         }
+        {this.state.isControllerShow && this.state.isProgressShow &&
+          <Progress />
+        }
         {this.state.isControllerShow &&
           <Footer
             primaryChange={this.darkPrimary}
             openSettingPage={this.openSettingPage}
+            openProgressPage={this.openProgressPage}
           />
         }
         <Drawer
@@ -69,6 +75,7 @@ class Reader extends Component {
       let regState = { isControllerShow: !preState.isControllerShow };
       if (preState.isControllerShow) {
         regState.isSettingShow = false; //controller隐藏时自动隐藏setting
+        regState.isProgressShow = false;
       }
       return regState;
     });
@@ -85,7 +92,16 @@ class Reader extends Component {
   openSettingPage = () => {
     this.setState((preState) => {
       return {
-        isSettingShow: !preState.isSettingShow
+        isSettingShow: !preState.isSettingShow,
+        //isProgressShow: !preState
+      }
+    });
+  }
+
+  openProgressPage = () => {
+    this.setState((preState) => {
+      return {
+        isProgressShow: !preState.isProgressShow
       }
     });
   }

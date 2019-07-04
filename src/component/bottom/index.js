@@ -55,7 +55,9 @@ class Footer extends Component {
     }
 
     progress = () => {
-        console.log('进度');
+        if (this.props.openProgressPage) {
+            this.props.openProgressPage();
+        }
     }
 
     setting = () => {
