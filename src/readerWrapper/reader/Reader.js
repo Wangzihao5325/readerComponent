@@ -29,7 +29,7 @@ class Reader extends Component {
       let { id } = NativeBridge.getReadingFictionInfo();
       Api.fetchChapterList(id, Params.Asc, 1, 100, (e) => {
         if (e) {
-          store_update_chapter_list(e);
+          store_update_chapter_list(e);//保存数据供
         }
       });
     }

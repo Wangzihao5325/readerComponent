@@ -1,18 +1,29 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { List } from 'antd';
+import * as Params from '../../global/param';
+import Api from '../../socket/index';
+import { store_get_text_html_body, store_update_data_info_danger } from '../../store/actions/dataActions';
 
 class Item extends Component {
     render() {
         let title = this.props.item.title.length >= 15 ? `${this.props.item.title.slice(0, 10)}...` : this.props.item.title;
         return (
-            <div style={{ width: '100%', height: 40, display: 'flex', flexDirection: 'column', paddingLeft: 24 }}>
+            <div onClick={this.itemOnClick} style={{ width: '100%', height: 40, display: 'flex', flexDirection: 'column', paddingLeft: 24 }}>
                 <div style={{ flex: 1, display: 'flex', flexDirection: 'row', alignItems: 'center', fontSize: 16 }}>
                     {title}
                 </div>
                 <div style={{ height: 1, width: '100%', backgroundColor: 'rgba(0,0,0,0.05)' }} />
             </div>
         );
+    }
+
+    itemOnClick = () => {
+        const { _id, fiction_id, title } = this.props.item;
+        Api.fetchFictionFileUrl(Params.Nnovel, fiction_id, _id, (e) => {
+            store_get_text_html_body(e.href, Params.Nnovel);
+        });
+        store_update_data_info_danger({ title });//危险方法
     }
 }
 

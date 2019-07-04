@@ -56,14 +56,16 @@ export default class InitialComponent extends Component {
         //请求数据
         let { id, global_type, title } = NativeBridge.getReadingFictionInfo();
         let chapterId = null;
+        let headerTitle = title;
         if (global_type === Params.Nnovel) {
             let chapterData = NativeBridge.getReadingChapterInfo();
             chapterId = chapterData.id;
+            headerTitle = chapterData.title;
         }
         Api.fetchFictionFileUrl(global_type, id, chapterId, (e) => {
             store_get_text_html_body(e.href, global_type);
         });
-        store_update_data_info_danger({ title });//危险方法
+        store_update_data_info_danger({ title: headerTitle });//危险方法
     }
 
     render() {
