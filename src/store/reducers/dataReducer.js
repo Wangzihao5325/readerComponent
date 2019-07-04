@@ -6,7 +6,8 @@ const initialState = {
     htmlBody: null,
     fictionType: Params.Nnovel,
     chapterList: [],
-    title: ''
+    title: '',
+    chapterId: null
 }
 
 const reducer = (state = initialState, action) => {
