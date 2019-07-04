@@ -51,6 +51,7 @@ class Reader extends Component {
           />
         }
         <Drawer
+          bodyStyle={{ padding: 0 }}
           placement="right"
           closable={false}
           onClose={store_close_drawer}
