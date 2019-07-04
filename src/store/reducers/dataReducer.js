@@ -7,6 +7,7 @@ const initialState = {
     fictionType: Params.Nnovel,
     chapterList: [],
     title: '',
+    fictionTitle: '',
     chapterId: null
 }
 

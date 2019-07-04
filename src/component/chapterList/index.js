@@ -30,7 +30,7 @@ class Item extends Component {
 
 class ChapterList extends Component {
     render() {
-        let title = this.props.title.length > 10 ? `${this.props.title.slice(0, 7)}...` : this.props.title;
+        let title = this.props.fictionTitle.length > 10 ? `${this.props.fictionTitle.slice(0, 7)}...` : this.props.fictionTitle;
         return (
             <div>
                 <div
@@ -62,7 +62,8 @@ function mapState2Props(store) {
     return {
         data: store.data.chapterList,
         title: store.data.title,
-        chapterId: store.data.chapterId
+        chapterId: store.data.chapterId,
+        fictionTitle: store.data.fictionTitle
     }
 }
 
