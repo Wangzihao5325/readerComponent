@@ -12,6 +12,10 @@ code {
     monospace;
 }
 
+p {
+  word-wrap:break-word
+}
+
 * {
   -webkit-touch-callout: none;
   -webkit-user-select: none;

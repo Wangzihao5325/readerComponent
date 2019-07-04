@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { store_open_drawer } from '../../store/actions/controllerAction';
 import * as Params from '../../global/param';
+import { CLIENT_WIDTH } from '../../global/size';
 
 class ItemBtn extends Component {
 
@@ -41,7 +42,7 @@ class Footer extends Component {
 
     render() {
         return (
-            <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', height: 64, width: '100%', position: 'fixed', bottom: 0, left: 0, backgroundColor: '#222' }}>
+            <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', height: 64, width: CLIENT_WIDTH, position: 'fixed', bottom: 0, left: 0, backgroundColor: '#222' }}>
                 {this.props.fictionType === Params.Nnovel && <ItemBtnWithStore key='menu_list' type='menu_list' icon={require('../../image/chapter_list.png')} callback={this.showChapterList} title='目录' />}
                 {this.props.fictionType === Params.Nnovel && <ItemBtnWithStore key='progress' type='progress' icon={require('../../image/progress.png')} callback={this.progress} title='进度' />}
                 <ItemBtnWithStore key='setting' type='setting' icon={require('../../image/font.png')} callback={this.setting} title='设置' />
