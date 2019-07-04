@@ -163,7 +163,7 @@ class api {
         this.securtyFetch(url, paramObj, onSuccess, onError);
     }
 
-    fetchFictionFileUrl(global_type, fiction_id, fiction_resource_id, onSuccess, onError) {
+    fetchFictionFileUrl(global_type, fiction_id, fiction_resource_id, index, onSuccess, onError) {
         const url = '/api/fiction/content';
         const timestamp = (new Date().getTime() / 1000).toFixed(0);
 
@@ -172,6 +172,7 @@ class api {
             formData.append('timestamp', timestamp);
             formData.append('fiction_id', fiction_id);
             formData.append('global_type', global_type);
+            formData.append('index', index);
             if (fiction_resource_id) {
                 formData.append('fiction_resource_id', fiction_resource_id);
             }
@@ -194,7 +195,7 @@ class api {
         this.securtyFetch(url, paramObj, onSuccess, onError);
     }
 
-    
+
 
 }
 

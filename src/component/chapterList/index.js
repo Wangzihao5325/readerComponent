@@ -20,8 +20,8 @@ class Item extends Component {
     }
 
     itemOnClick = () => {
-        const { _id, fiction_id, title } = this.props.item;
-        Api.fetchFictionFileUrl(Params.Nnovel, fiction_id, _id, (e) => {
+        const { _id, fiction_id, title, index } = this.props.item;
+        Api.fetchFictionFileUrl(Params.Nnovel, fiction_id, _id, index, (e) => {
             store_get_text_html_body(e.href, Params.Nnovel);
         });
         store_update_data_info_danger({ title, chapterId: _id });//危险方法

@@ -93,7 +93,7 @@ class Reader extends Component {
     this.setState((preState) => {
       return {
         isSettingShow: !preState.isSettingShow,
-        //isProgressShow: !preState
+        isProgressShow: false
       }
     });
   }
@@ -101,7 +101,8 @@ class Reader extends Component {
   openProgressPage = () => {
     this.setState((preState) => {
       return {
-        isProgressShow: !preState.isProgressShow
+        isProgressShow: !preState.isProgressShow,
+        isSettingShow: false
       }
     });
   }
