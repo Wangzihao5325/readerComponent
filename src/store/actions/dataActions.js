@@ -11,7 +11,6 @@ import { store_initial_done } from './initialActions';
 
 const SecurtyKey = CryptoJS.enc.Utf8.parse('wPK8CxWaOwPuVzgs');
 
-
 export function store_get_text_html_body(uri, fictionType) {
     store.dispatch({ type: DATA_LOADING });
 
