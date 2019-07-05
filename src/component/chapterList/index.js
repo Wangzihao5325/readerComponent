@@ -29,7 +29,7 @@ class Item extends Component {
                 store_get_text_html_body(e.href, Params.Nnovel);
             }
         });
-        store_update_data_info_danger({ title, chapterId: _id, progressShowChapterIndex: index, progressShowChapterTitle: title });//危险方法
+        store_update_data_info_danger({ title, chapterId: _id, progressShowChapterIndex: index, progressShowChapterTitle: title, chapterIndex: index });//危险方法
     }
 }
 

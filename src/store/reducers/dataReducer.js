@@ -8,7 +8,7 @@ const initialState = {
     chapterList: [],
     title: '',
     fictionTitle: '',
-    chapterId: null,
+    chapterIndex: 0,
     firstChapterIndex: 0,
     lastChapterIndex: 0,
     progressShowChapterIndex: 0,
