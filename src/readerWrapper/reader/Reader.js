@@ -49,7 +49,7 @@ class Reader extends Component {
   render() {
     return (
       <div id='reader_content' className={this.props.textContainerClassName} style={{ position: 'relative' }}>
-        {/* {this.props.fetchState !== 'done' && <Mask />} */}
+        {this.props.fetchState !== 'done' && <Mask />}
         {this.state.isControllerShow && <Header />}
         {this.props.htmlBody && <div onClick={this.textOnClick} dangerouslySetInnerHTML={this.props.htmlBody} />}
         {this.state.isControllerShow && this.state.isSettingShow &&

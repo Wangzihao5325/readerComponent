@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import { CLIENT_HEIGHT, CLIENT_WIDTH } from '../../global/size';
 import { Spin } from 'antd';
+import './index.css';
 export default class Mask extends Component {
     render() {
         return (
             <div
+                className='fixed-div'
                 style={{
                     height: CLIENT_HEIGHT,
                     width: CLIENT_WIDTH,
@@ -18,9 +20,11 @@ export default class Mask extends Component {
                     top: 0,
                     left: 0
                 }}
+                onTouchmove={this.touchmove}
             >
                 <Spin />
             </div>
         );
     }
+
 }
