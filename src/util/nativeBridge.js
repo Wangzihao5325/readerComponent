@@ -3,6 +3,7 @@ import Api from '../socket/index';
 import { store_get_text_html_body, store_update_data_info_danger } from '../store/actions/dataActions';
 import * as Params from '../global/param';
 import * as BrowserUtil from '../util/browserUtil';
+import { message as Message } from 'antd';
 
 class nativeBridge {
 
@@ -106,7 +107,7 @@ class nativeBridge {
         }
         Api.fetchFictionFileUrl(global_type, id, chapterId, index, (e, code, message) => {
             if (code === 200) {
-                //window.android.buyFiction(id, global_type);
+                Message.error('购买出现异常，请退出重试！');
             } else {
                 store_get_text_html_body(e.href, global_type);
                 store_update_data_info_danger({ title: headerTitle, fictionTitle: title, chapterIndex: index });//危险方法
