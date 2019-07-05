@@ -4,6 +4,7 @@ import { store_get_text_html_body, store_update_data_info_danger } from '../stor
 import * as Params from '../global/param';
 import * as BrowserUtil from '../util/browserUtil';
 import { message as Message } from 'antd';
+import Variables from '../global/variables';
 
 class nativeBridge {
 
@@ -100,7 +101,7 @@ class nativeBridge {
         let index = 0;
         let headerTitle = title;
         if (global_type === Params.Nnovel) {
-            let chapterData = this.getReadingChapterInfo();
+            let chapterData = Variables.buyInfo.reg
             index = chapterData.index;
             chapterId = chapterData.id;
             headerTitle = chapterData.title;

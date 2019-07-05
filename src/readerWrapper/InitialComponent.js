@@ -73,6 +73,7 @@ export default class InitialComponent extends Component {
         }
         Api.fetchFictionFileUrl(global_type, id, chapterId, index, (e, code, message) => {
             if (code === 200) {
+                Variables.buyInfo.reg = { index, title: headerTitle, id: chapterId };
                 let result = NativeBridge.buyFiction(id, global_type, 'true');
                 if (result === 'success') {
                     NativeBridge.buySuccess();

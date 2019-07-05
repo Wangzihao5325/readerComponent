@@ -8,6 +8,7 @@ import NativeBridge from '../../util/nativeBridge';
 import * as Params from '../../global/param';
 import Api from '../../socket/index';
 import * as BrowserUtil from '../../util/browserUtil';
+import Variables from '../../global/variables';
 
 class Progress extends Component {
 
@@ -20,7 +21,8 @@ class Progress extends Component {
         const { _id, fiction_id, title, index } = this.props.chapterList[value];
         Api.fetchFictionFileUrl(Params.Nnovel, fiction_id, _id, index, (e, code) => {
             if (code === 200) {
-                let result = NativeBridge.buyFiction(_id, Params.Nnovel,'false');
+                Variables.buyInfo.reg = { index, title, id: _id };
+                let result = NativeBridge.buyFiction(_id, Params.Nnovel, 'false');
                 if (result === 'success') {
                     NativeBridge.buySuccess();
                 } else if (result === 'failed') {

@@ -5,5 +5,8 @@ export default {
     },
     service: {
         domain: 'http://192.168.0.146:50005'
+    },
+    buyInfo: {
+        reg: null
     }
 }

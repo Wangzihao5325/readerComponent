@@ -7,6 +7,7 @@ import { store_get_text_html_body, store_update_data_info_danger } from '../../s
 import { store_change_data_list_asc } from '../../store/actions/modeActions';
 import NativeBridge from '../../util/nativeBridge';
 import * as BrowserUtil from '../../util/browserUtil';
+import Variables from '../../global/variables';
 
 class Item extends Component {
     render() {
@@ -26,7 +27,8 @@ class Item extends Component {
         const { _id, fiction_id, title, index } = this.props.item;
         Api.fetchFictionFileUrl(Params.Nnovel, fiction_id, _id, index, (e, code) => {
             if (code === 200) {
-                let result = NativeBridge.buyFiction(_id, Params.Nnovel,'false');
+                Variables.buyInfo.reg = { index, title, id: _id };
+                let result = NativeBridge.buyFiction(_id, Params.Nnovel, 'false');
                 if (result === 'success') {
                     NativeBridge.buySuccess();
                 } else if (result === 'failed') {
