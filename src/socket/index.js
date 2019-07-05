@@ -130,7 +130,7 @@ class api {
                             }
                         }
                     } catch (error) {
-                        onError ? onError(result, code, message) : console.log(`error: socket error! ${error}`);
+                        onError ? onError(result, code, message) : console.log(`error: socket error! ${url}`);
                     }
                 }
             )

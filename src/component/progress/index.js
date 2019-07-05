@@ -20,11 +20,11 @@ class Progress extends Component {
         const { _id, fiction_id, title, index } = this.props.chapterList[value];
         Api.fetchFictionFileUrl(Params.Nnovel, fiction_id, _id, index, (e, code) => {
             if (code === 200) {
-                let result = NativeBridge.buyFiction(_id, Params.Nnovel);
+                let result = NativeBridge.buyFiction(_id, Params.Nnovel,'false');
                 if (result === 'success') {
                     NativeBridge.buySuccess();
                 } else if (result === 'failed') {
-                    Message.error('购买失败！');
+                    Message.error('购买失败,请重试!');
                 }
             } else {
                 store_get_text_html_body(e.href, Params.Nnovel);

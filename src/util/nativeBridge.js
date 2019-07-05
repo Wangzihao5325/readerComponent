@@ -116,6 +116,17 @@ class nativeBridge {
         });
     }
 
+    buyFailedAndroid(isFirst, type) {
+        if (type === 'failed') {
+            Message.error('购买失败,请重试!');
+        } else if (type === 'cancel') {
+            Message.error('购买已取消！');
+        }
+        if (isFirst === 'true') {
+            setTimeout(this.backToNative, 1000);
+        }
+    }
+
 }
 
 export default new nativeBridge();
