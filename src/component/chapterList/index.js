@@ -38,6 +38,11 @@ class Item extends Component {
 
 
 class ChapterList extends Component {
+
+    componentDidMount() {
+        console.log('1122334');
+    }
+
     render() {
         let title = this.props.fictionTitle.length > 10 ? `${this.props.fictionTitle.slice(0, 7)}...` : this.props.fictionTitle;
         let chapterNum = `共${this.props.data.length}章`;
@@ -85,7 +90,7 @@ class ChapterList extends Component {
                 </div>
                 <List
                     dataSource={data}
-                    renderItem={item => <Item chapterId={this.props.chapterId} item={item} />}
+                    renderItem={(item, index) => <Item key={index} chapterId={this.props.chapterId} item={item} />}
                 />
             </div>
         );

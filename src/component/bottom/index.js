@@ -46,7 +46,7 @@ class Footer extends Component {
                 {this.props.fictionType === Params.Nnovel && <ItemBtnWithStore key='menu_list' type='menu_list' icon={require('../../image/chapter_list.png')} callback={this.showChapterList} title='目录' />}
                 {this.props.fictionType === Params.Nnovel && <ItemBtnWithStore key='progress' type='progress' icon={require('../../image/progress.png')} callback={this.progress} title='进度' />}
                 <ItemBtnWithStore key='setting' type='setting' icon={require('../../image/font.png')} callback={this.setting} title='设置' />
-                <ItemBtnWithStore key='mode' type='mode' type='special' icon2={require('../../image/moon.png')} icon={require('../../image/sun.png')} callback={this.primary} title='日间' />
+                <ItemBtnWithStore key='mode' type='special' icon2={require('../../image/moon.png')} icon={require('../../image/sun.png')} callback={this.primary} title='日间' />
             </div>
         );
     }

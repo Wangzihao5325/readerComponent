@@ -68,6 +68,8 @@ const reducer = (state = initialState, action) => {
                 case 7:
                     fontSizeClassName = defaultFontSizeClassNamePlus3;
                     break;
+                default:
+                    break;
             }
             window.localStorage.setItem('sliderValue', `${action.sliderValue}`);
             return {
@@ -91,6 +93,8 @@ const reducer = (state = initialState, action) => {
                     break;
                 case 3:
                     lightBgColorClassName = whiteBgColorClassName;
+                    break;
+                default:
                     break;
             }
             window.localStorage.setItem('lightColorSelectIndex', `${action.index}`);

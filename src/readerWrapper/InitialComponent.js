@@ -4,9 +4,6 @@ import NativeBridge from '../util/nativeBridge';
 import Variables from '../global/variables';
 import { CLIENT_HEIGHT, CLIENT_WIDTH } from '../global/size';
 import {
-    store_initial_done
-} from '../store/actions/initialActions';
-import {
     store_change_mode_to_dark,
     store_update_slider_value,
     store_change_light_bg_color
@@ -21,7 +18,7 @@ import VConsole from 'vconsole';
 
 
 window.updateValue = function (url) {
-    if (window.ZQ_bridge != undefined) {
+    if (window.ZQ_bridge !== undefined) {
         window.ZQ_bridge.updateValue(url);
     }
 };
