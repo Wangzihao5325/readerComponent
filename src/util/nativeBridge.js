@@ -82,10 +82,10 @@ class nativeBridge {
         return JSON.parse(jsonStr);
     }
 
-    buyFiction(id, type) {
+    buyFiction(id, type, isFirst) {
         let result = null;
         if (browser.versions.android) {
-            window.android.buyFiction(id, type);
+            window.android.buyFiction(id, type, isFirst);
         }
         if (browser.versions.ios) {
             result = prompt("BuyFiction://");
