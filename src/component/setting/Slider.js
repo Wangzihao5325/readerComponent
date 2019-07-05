@@ -4,9 +4,6 @@ import { Slider, Icon } from 'antd';
 import { store_update_slider_value } from '../../store/actions/modeActions';
 
 class IconSlider extends Component {
-    state = {
-        value: 1,
-    }
 
     handleChange = value => {
         store_update_slider_value(value);
