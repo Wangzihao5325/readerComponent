@@ -21,8 +21,10 @@ class Progress extends Component {
         Api.fetchFictionFileUrl(Params.Nnovel, fiction_id, _id, index, (e, code) => {
             if (code === 200) {
                 let result = NativeBridge.buyFiction(_id, Params.Nnovel);
-                if (result) {
+                if (result === 'success') {
                     NativeBridge.buySuccess();
+                } else if (result === 'failed') {
+                    Message.error('购买失败！');
                 }
             } else {
                 store_get_text_html_body(e.href, Params.Nnovel);

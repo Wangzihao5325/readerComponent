@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Spin } from 'antd';
+import { Spin, message as Message } from 'antd';
 import NativeBridge from '../util/nativeBridge';
 import Variables from '../global/variables';
 import { CLIENT_HEIGHT, CLIENT_WIDTH } from '../global/size';
@@ -74,8 +74,15 @@ export default class InitialComponent extends Component {
         Api.fetchFictionFileUrl(global_type, id, chapterId, index, (e, code, message) => {
             if (code === 200) {
                 let result = NativeBridge.buyFiction(id, global_type);
-                if (result) {
+                if (result === 'success') {
                     NativeBridge.buySuccess();
+                } else if (result === 'failed') {
+                    Message.error('购买失败!');
+                    setTimeout(NativeBridge.backToNative, 1000);
+
+                } else if (result === 'cancel') {
+                    Message.error('您已经取消购买!');
+                    setTimeout(NativeBridge.backToNative, 1000);
                 }
             } else {
                 store_get_text_html_body(e.href, global_type);
