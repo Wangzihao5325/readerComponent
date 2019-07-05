@@ -77,9 +77,9 @@ export default class InitialComponent extends Component {
                 //window.android.buyFiction(id, global_type);
             } else {
                 store_get_text_html_body(e.href, global_type);
+                store_update_data_info_danger({ title: headerTitle, fictionTitle: title, chapterIndex: index });//危险方法
             }
         });
-        store_update_data_info_danger({ title: headerTitle, fictionTitle: title, chapterIndex: index });//危险方法
 
     }
 

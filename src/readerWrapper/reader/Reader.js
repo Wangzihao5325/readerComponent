@@ -15,6 +15,7 @@ import {
   store_update_data_info_danger
 } from '../../store/actions/dataActions';
 import { store_close_drawer } from '../../store/actions/controllerAction';
+import Mask from '../../component/mask/index';
 import './Reader.css';
 
 
@@ -48,6 +49,7 @@ class Reader extends Component {
   render() {
     return (
       <div id='reader_content' className={this.props.textContainerClassName} style={{ position: 'relative' }}>
+        {/* {this.props.fetchState !== 'done' && <Mask />} */}
         {this.state.isControllerShow && <Header />}
         {this.props.htmlBody && <div onClick={this.textOnClick} dangerouslySetInnerHTML={this.props.htmlBody} />}
         {this.state.isControllerShow && this.state.isSettingShow &&
@@ -123,7 +125,8 @@ function mapState2Props(store) {
     htmlBody: store.data.htmlBody,
     appState: store.data.state,
     fictionType: store.data.fictionType,
-    isDrawerShow: store.controller.isDrawerShow
+    isDrawerShow: store.controller.isDrawerShow,
+    fetchState: store.data.state,
   }
 }
 
