@@ -10,7 +10,7 @@ class nativeBridge {
             window.android.finishActivity();
         }
         if (browser.versions.ios) {
-
+            prompt("Back://");
         }
     }
 
@@ -80,6 +80,15 @@ class nativeBridge {
         return JSON.parse(jsonStr);
     }
 
+    buyFiction(id, type) {
+        if (browser.versions.android) {
+            window.android.buyFiction(id, type);
+        }
+        if (browser.versions.ios) {
+            //
+        }
+    }
+
     buySuccess() {
         //请求数据
         let { id, global_type, title } = this.getReadingFictionInfo();
@@ -94,7 +103,7 @@ class nativeBridge {
         }
         Api.fetchFictionFileUrl(global_type, id, chapterId, index, (e, code, message) => {
             if (code === 200) {
-                window.android.buyFiction(id, global_type);
+                //window.android.buyFiction(id, global_type);
             } else {
                 store_get_text_html_body(e.href, global_type);
             }
