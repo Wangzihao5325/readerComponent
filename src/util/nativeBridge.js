@@ -108,7 +108,7 @@ class nativeBridge {
                 store_get_text_html_body(e.href, global_type);
             }
         });
-        store_update_data_info_danger({ title: headerTitle, fictionTitle: title, chapterId });//危险方法
+        store_update_data_info_danger({ title: headerTitle, fictionTitle: title });//危险方法
     }
 
 }
