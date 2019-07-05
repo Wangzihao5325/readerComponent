@@ -7,6 +7,7 @@ import { store_update_data_info_danger, store_get_text_html_body } from '../../s
 import NativeBridge from '../../util/nativeBridge';
 import * as Params from '../../global/param';
 import Api from '../../socket/index';
+import * as BrowserUtil from '../../util/browserUtil';
 
 class Progress extends Component {
 
@@ -22,6 +23,7 @@ class Progress extends Component {
                 NativeBridge.buyFiction(_id, Params.Nnovel);
             } else {
                 store_get_text_html_body(e.href, Params.Nnovel);
+                BrowserUtil.backToTop();
             }
         });
         store_update_data_info_danger({ title, chapterId: _id, progressShowChapterIndex: index, progressShowChapterTitle: title, chapterIndex: index });//危险方法

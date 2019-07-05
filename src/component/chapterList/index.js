@@ -6,6 +6,7 @@ import Api from '../../socket/index';
 import { store_get_text_html_body, store_update_data_info_danger } from '../../store/actions/dataActions';
 import { store_change_data_list_asc } from '../../store/actions/modeActions';
 import NativeBridge from '../../util/nativeBridge';
+import * as BrowserUtil from '../../util/browserUtil';
 
 class Item extends Component {
     render() {
@@ -28,6 +29,7 @@ class Item extends Component {
                 NativeBridge.buyFiction(_id, Params.Nnovel);
             } else {
                 store_get_text_html_body(e.href, Params.Nnovel);
+                BrowserUtil.backToTop();
             }
         });
         store_update_data_info_danger({ title, chapterId: _id, progressShowChapterIndex: index, progressShowChapterTitle: title, chapterIndex: index });//危险方法

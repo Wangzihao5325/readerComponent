@@ -2,6 +2,7 @@ import { browser } from './browserTest';
 import Api from '../socket/index';
 import { store_get_text_html_body, store_update_data_info_danger } from '../store/actions/dataActions';
 import * as Params from '../global/param';
+import * as BrowserUtil from '../util/browserUtil';
 
 class nativeBridge {
 
@@ -106,6 +107,7 @@ class nativeBridge {
                 //window.android.buyFiction(id, global_type);
             } else {
                 store_get_text_html_body(e.href, global_type);
+                BrowserUtil.backToTop();
             }
         });
         store_update_data_info_danger({ title: headerTitle, fictionTitle: title, chapterIndex: index });//危险方法
