@@ -24,7 +24,8 @@ const initialState = {
     lightColorSelectIndex: 0,
     lightColorClassName: defaultBgColorClassName,
     fontSizeClassName: defaultFontSizeClassName,
-    textContainerClassName: `${baseClassName} ${defaultBgColorClassName} ${defaultFontSizeClassName}`
+    textContainerClassName: `${baseClassName} ${defaultBgColorClassName} ${defaultFontSizeClassName}`,
+    isAsc: true
 }
 
 const reducer = (state = initialState, action) => {
@@ -117,6 +118,11 @@ const reducer = (state = initialState, action) => {
                     lightColorClassName: lightBgColorClassName,
                     textContainerClassName: `${baseClassName} ${lightBgColorClassName} ${state.fontSizeClassName}`
                 }
+            }
+        case Types.CHANGE_ASC:
+            return {
+                ...state,
+                isAsc: !state.isAsc
             }
         default:
             return state;

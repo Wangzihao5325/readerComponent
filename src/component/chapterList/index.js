@@ -4,6 +4,7 @@ import { List } from 'antd';
 import * as Params from '../../global/param';
 import Api from '../../socket/index';
 import { store_get_text_html_body, store_update_data_info_danger } from '../../store/actions/dataActions';
+import { store_change_data_list_asc } from '../../store/actions/modeActions';
 import NativeBridge from '../../util/nativeBridge';
 
 class Item extends Component {
@@ -33,9 +34,17 @@ class Item extends Component {
     }
 }
 
+
 class ChapterList extends Component {
     render() {
         let title = this.props.fictionTitle.length > 10 ? `${this.props.fictionTitle.slice(0, 7)}...` : this.props.fictionTitle;
+        let chapterNum = `共${this.props.data.length}章`;
+        let data = this.props.data.concat();
+        let ascText = '倒序';
+        if (!this.props.isAsc) {
+            data.reverse();
+            ascText = '正序'
+        }
         return (
             <div>
                 <div
@@ -54,12 +63,34 @@ class ChapterList extends Component {
                     }}>
                     {title}
                 </div>
+                <div
+                    style={{
+                        height: 38,
+                        width: '100%',
+                        display: 'flex',
+                        flexDirection: 'row',
+                        justifyContent: 'space-between',
+                        alignItems: 'center',
+                        fontSize: 14,
+                        borderBottomColor: 'rgba(0,0,0,0.05)',
+                        borderBottomWidth: 1,
+                        borderBottomStyle: 'solid',
+                        paddingLeft: 12,
+                        paddingRight: 12,
+                    }}>
+                    <div style={{ color: '#000', fontWeight: 'bold' }}>{chapterNum}</div>
+                    <div onClick={this.changeAsc} style={{ color: '#F00', fontWeight: 'bold' }}>{ascText}</div>
+                </div>
                 <List
-                    dataSource={this.props.data}
+                    dataSource={data}
                     renderItem={item => <Item chapterId={this.props.chapterId} item={item} />}
                 />
             </div>
         );
+    }
+
+    changeAsc = () => {
+        store_change_data_list_asc();
     }
 }
 
@@ -68,7 +99,8 @@ function mapState2Props(store) {
         data: store.data.chapterList,
         title: store.data.title,
         chapterId: store.data.chapterId,
-        fictionTitle: store.data.fictionTitle
+        fictionTitle: store.data.fictionTitle,
+        isAsc: store.mode.isAsc
     }
 }
 
