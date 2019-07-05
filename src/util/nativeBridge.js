@@ -82,12 +82,14 @@ class nativeBridge {
     }
 
     buyFiction(id, type) {
+        let result = null;
         if (browser.versions.android) {
             window.android.buyFiction(id, type);
         }
         if (browser.versions.ios) {
-            //
+            result = prompt("BuyFiction://");
         }
+        return result;
     }
 
     buySuccess() {

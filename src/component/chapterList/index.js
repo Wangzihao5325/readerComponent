@@ -26,7 +26,10 @@ class Item extends Component {
         const { _id, fiction_id, title, index } = this.props.item;
         Api.fetchFictionFileUrl(Params.Nnovel, fiction_id, _id, index, (e, code) => {
             if (code === 200) {
-                NativeBridge.buyFiction(_id, Params.Nnovel);
+                let result = NativeBridge.buyFiction(_id, Params.Nnovel);
+                if (result) {
+                    NativeBridge.buySuccess();
+                }
             } else {
                 store_get_text_html_body(e.href, Params.Nnovel);
                 store_update_data_info_danger({ title, chapterId: _id, progressShowChapterIndex: index, progressShowChapterTitle: title, chapterIndex: index });//危险方法

@@ -73,8 +73,10 @@ export default class InitialComponent extends Component {
         }
         Api.fetchFictionFileUrl(global_type, id, chapterId, index, (e, code, message) => {
             if (code === 200) {
-                NativeBridge.buyFiction(id, global_type);
-                //window.android.buyFiction(id, global_type);
+                let result = NativeBridge.buyFiction(id, global_type);
+                if (result) {
+                    NativeBridge.buySuccess();
+                }
             } else {
                 store_get_text_html_body(e.href, global_type);
                 store_update_data_info_danger({ title: headerTitle, fictionTitle: title, chapterIndex: index });//危险方法
