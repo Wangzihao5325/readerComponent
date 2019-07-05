@@ -30,14 +30,14 @@ class Reader extends Component {
   componentDidMount() {
     if (this.props.fictionType === Params.Nnovel) {
       let { id } = NativeBridge.getReadingFictionInfo();
-      let { index } = NativeBridge.getReadingChapterInfo();
+      let { index, title } = NativeBridge.getReadingChapterInfo();
       Api.fetchChapterList(id, Params.Asc, 1, 100, (e) => {
         if (e) {
           store_update_chapter_list(e);//保存数据供
           if (e.length > 0) {
             let lastChapterIndex = e[e.length - 1].index;
             let firstChapterIndex = e[0].index;
-            store_update_data_info_danger({ firstChapterIndex, lastChapterIndex, progressShowChapterIndex: index });
+            store_update_data_info_danger({ firstChapterIndex, lastChapterIndex, progressShowChapterIndex: index, progressShowChapterTitle: title });
           }
         }
       });

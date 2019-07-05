@@ -12,6 +12,7 @@ const initialState = {
     firstChapterIndex: 0,
     lastChapterIndex: 0,
     progressShowChapterIndex: 0,
+    progressShowChapterTitle: ''
 }
 
 const reducer = (state = initialState, action) => {
