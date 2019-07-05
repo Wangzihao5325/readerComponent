@@ -30,10 +30,10 @@ class Progress extends Component {
                 }
             } else {
                 store_get_text_html_body(e.href, Params.Nnovel);
+                store_update_data_info_danger({ title, progressShowChapterIndex: index, progressShowChapterTitle: title, chapterIndex: index });//危险方法
                 BrowserUtil.backToTop();
             }
         });
-        store_update_data_info_danger({ title, chapterId: _id, progressShowChapterIndex: index, progressShowChapterTitle: title, chapterIndex: index });//危险方法
     }
 
     nextChapter = () => {

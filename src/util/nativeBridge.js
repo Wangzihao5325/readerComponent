@@ -111,7 +111,7 @@ class nativeBridge {
                 Message.error('购买出现异常，请退出重试！');
             } else {
                 store_get_text_html_body(e.href, global_type);
-                store_update_data_info_danger({ title: headerTitle, fictionTitle: title, chapterIndex: index });//危险方法
+                store_update_data_info_danger({ title: headerTitle, progressShowChapterIndex: index, progressShowChapterTitle: headerTitle, fictionTitle: title, chapterIndex: index });//危险方法
                 BrowserUtil.backToTop();
             }
         });
