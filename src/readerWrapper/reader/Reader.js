@@ -11,7 +11,8 @@ import ChapterList from '../../component/chapterList/index';
 import Progress from '../../component/progress/index';
 import { store_change_mode_to_light, store_change_mode_to_dark } from '../../store/actions/modeActions';
 import {
-  store_update_chapter_list
+  store_update_chapter_list,
+  store_update_data_info_danger
 } from '../../store/actions/dataActions';
 import { store_close_drawer } from '../../store/actions/controllerAction';
 import './Reader.css';
@@ -29,9 +30,15 @@ class Reader extends Component {
   componentDidMount() {
     if (this.props.fictionType === Params.Nnovel) {
       let { id } = NativeBridge.getReadingFictionInfo();
+      let { index } = NativeBridge.getReadingChapterInfo();
       Api.fetchChapterList(id, Params.Asc, 1, 100, (e) => {
         if (e) {
           store_update_chapter_list(e);//保存数据供
+          if (e.length > 0) {
+            let lastChapterIndex = e[e.length - 1].index;
+            let firstChapterIndex = e[0].index;
+            store_update_data_info_danger({ firstChapterIndex, lastChapterIndex, progressShowChapterIndex: index });
+          }
         }
       });
     }

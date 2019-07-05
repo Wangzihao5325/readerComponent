@@ -8,7 +8,10 @@ const initialState = {
     chapterList: [],
     title: '',
     fictionTitle: '',
-    chapterId: null
+    chapterId: null,
+    firstChapterIndex: 0,
+    lastChapterIndex: 0,
+    progressShowChapterIndex: 0,
 }
 
 const reducer = (state = initialState, action) => {
