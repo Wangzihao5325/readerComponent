@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { CLIENT_WIDTH } from '../../global/size';
 import { connect } from 'react-redux';
-import { Slider } from 'antd';
+import { Slider, message as Message } from 'antd';
 import './index.css';
 import { store_update_data_info_danger, store_get_text_html_body } from '../../store/actions/dataActions';
 import NativeBridge from '../../util/nativeBridge';
@@ -28,11 +28,19 @@ class Progress extends Component {
     }
 
     nextChapter = () => {
-
+        if (this.props.chapterIndex >= this.props.chapterList.length - 1) {
+            Message.warning('已经是最后一章了哟！');
+        } else {
+            this.afterChange(this.props.chapterIndex + 1);
+        }
     }
 
     preChapter = () => {
-
+        if (this.props.chapterIndex <= 0) {
+            Message.warning('已经是首章了哟！');
+        } else {
+            this.afterChange(this.props.chapterIndex - 1);
+        }
     }
 
     render() {
@@ -59,7 +67,8 @@ function mapState2Props(store) {
         firstIndex: store.data.firstChapterIndex,
         lastIndex: store.data.lastChapterIndex,
         progressIndex: store.data.progressShowChapterIndex,
-        chapterList: store.data.chapterList
+        chapterList: store.data.chapterList,
+        chapterIndex: store.data.chapterIndex,
     }
 }
 
